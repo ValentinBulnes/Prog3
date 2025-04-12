@@ -18,19 +18,36 @@ public class MySimpleLinkedList<T> {
 		this.size = this.size +1;
 	}
 	
-	public T extractFront() {		
-		// TODO
-		return null;
+	public T extractFront() {
+		if(this.isEmpty()) {
+			return null;
+		}
+		Node<T> tmp = this.first;
+		this.first = tmp.getNext();
+		this.size = this.size - 1;
+		return tmp.getInfo();
 	}
 
 	public boolean isEmpty() {
-		// TODO
+		if(this.first == null) {
+			return true;
+		}
 		return false;
 	}
 	
 	public T get(int index) {
-		// TODO
-		return null;
+		if(this.isEmpty() || index < 0 || index >= this.size) {
+			return null;
+		}
+		if(index == 0) {
+			return this.first.getInfo();
+		}
+
+		Node<T> tmp = this.first;
+		for(int i = 0; i < index; i++) {
+			tmp = tmp.getNext();
+		}
+		return tmp.getInfo();
 	}
 	
 	public int size() {
@@ -39,8 +56,21 @@ public class MySimpleLinkedList<T> {
 	
 	@Override
 	public String toString() {
-		// TODO
-		return "";
+		if (this.isEmpty()) {
+			return "[]";
+		}
+		String result = "[";
+		Node<T> current = this.first;
+
+		while (current != null) {
+			result += current.getInfo();
+			current = current.getNext();
+			if (current != null) {
+				result += ", ";
+			}
+		}
+
+		return result + "]";
 	}
 	
 }

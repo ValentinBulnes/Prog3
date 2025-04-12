@@ -3,15 +3,19 @@ package ProgramacionIII.tp1;
 public class MySimpleLinkedList<T> {
 	
 	private Node<T> first;
-	
+	private int size;
+
+
 	public MySimpleLinkedList() {
 		this.first = null;
+		this.size = 0;
 	}
 	
 	public void insertFront(T info) {
 		Node<T> tmp = new Node<T>(info,null);
 		tmp.setNext(this.first);
 		this.first = tmp;
+		this.size = this.size +1;
 	}
 	
 	public T extractFront() {		
@@ -30,8 +34,7 @@ public class MySimpleLinkedList<T> {
 	}
 	
 	public int size() {
-		// TODO
-		return 0;
+		return this.size;
 	}
 	
 	@Override

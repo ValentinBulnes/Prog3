@@ -1,22 +1,38 @@
 package ProgramacionIII.tp1;
 
+import java.util.Iterator;
+
 public class Main {
     public static void main(String[] args) {
-        MySimpleLinkedList<Integer> lista = new MySimpleLinkedList<>();
+        MySimpleLinkedList<Integer> myList = new MySimpleLinkedList<Integer>();
 
-        lista.insertFront(1); //pos3
-        lista.insertFront(2); //pos2
-        lista.insertFront(3); //pos1
-        lista.insertFront(4); //pos0
+        myList.insertFront(22); //pos4
+        myList.insertFront(12); //pos3
+        myList.insertFront(1); //pos2
+        myList.insertFront(8); //pos1
+        myList.insertFront(7); //pos0
 
-//        System.out.println(lista);
-//        System.out.println(lista.isEmpty());
-//        System.out.println(lista.size());
-//
-//        lista.extractFront();
-//        System.out.println(lista);
-//        System.out.println(lista.size());
+        Iterator<Integer> it = myList.iterator();
 
-        System.out.println(lista.get(4));
+        /*
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+        */
+
+        for (Integer i : myList) {
+            System.out.println(i);
+        }
+
+
+        // System.out.println(myList);
+        // System.out.println(myList.isEmpty());
+        // System.out.println(myList.size());
+
+        // myList.extractFront();
+        // System.out.println(myList);
+        // System.out.println(myList.size());
+
+        // System.out.println(myList.indexOf(8));
     }
 }

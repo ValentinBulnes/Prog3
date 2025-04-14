@@ -1,7 +1,9 @@
 package ProgramacionIII.tp1;
 
-public class MySimpleLinkedList<T> {
-	
+import java.util.Iterator;
+
+public class MySimpleLinkedList<T> implements Iterable<T> {
+
 	private Node<T> first;
 	private int size;
 
@@ -53,6 +55,17 @@ public class MySimpleLinkedList<T> {
 	public int size() {
 		return this.size;
 	}
+
+	public int indexOf(T element) {
+		Node<T> tmp = this.first;
+		for(int i = 0; i < this.size; i++) {
+			if(tmp.getInfo().equals(element)) {
+				return i;
+			}
+			tmp = tmp.getNext();
+		}
+		return -1;
+	}
 	
 	@Override
 	public String toString() {
@@ -71,6 +84,11 @@ public class MySimpleLinkedList<T> {
 		}
 
 		return result + "]";
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new MyIterator<>(this.first);
 	}
 	
 }

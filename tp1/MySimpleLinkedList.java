@@ -2,7 +2,7 @@ package ProgramacionIII.tp1;
 
 import java.util.Iterator;
 
-public class MySimpleLinkedList<T> implements Iterable<T> {
+public class MySimpleLinkedList<T extends Comparable<T>> implements Iterable<T> {
 
 	private Node<T> first;
 	private int size;
@@ -12,6 +12,25 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 		this.first = null;
 		this.size = 0;
 	}
+
+	public void insertarOrdenado(T info) {
+		Node<T> newNode = new Node<T>(info,null);
+
+		if (first == null || info.compareTo(first.getInfo())<0) {
+			this.insertFront(newNode.getInfo());
+		}
+		else {
+			Node<T> aux = first;
+
+			while (aux.getNext()!=null && info.compareTo(aux.getNext().getInfo())>=0) {
+				aux = aux.getNext();
+			}
+				newNode.setNext(aux.getNext());
+				aux.setNext(newNode);
+			}
+		this.size++;
+	}
+
 	
 	public void insertFront(T info) {
 		Node<T> tmp = new Node<T>(info,null);
@@ -66,6 +85,8 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 		}
 		return -1;
 	}
+
+
 	
 	@Override
 	public String toString() {
@@ -90,5 +111,4 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 	public Iterator<T> iterator() {
 		return new MyIterator<>(this.first);
 	}
-	
 }

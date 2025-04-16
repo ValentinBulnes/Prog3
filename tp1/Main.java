@@ -81,12 +81,34 @@ public class Main {
         while (info1 != null && info2 != null) {
             if (info1.equals(info2)) {
                 resultado.insertarOrdenado(info1); // Insertamos el elemento en orden
-                info1 = iter1.hasNext() ? iter1.next() : null;
-                info2 = iter2.hasNext() ? iter2.next() : null;
+
+                // Avanza ambos iteradores (versión con if-else)
+                if (iter1.hasNext()) {
+                    info1 = iter1.next();
+                } else {
+                    info1 = null;
+                }
+
+                if (iter2.hasNext()) {
+                    info2 = iter2.next();
+                } else {
+                    info2 = null;
+                }
+
             } else if (info1 < info2) {
-                info1 = iter1.hasNext() ? iter1.next() : null;
+                // Avanza solo iter1 (versión con if-else)
+                if (iter1.hasNext()) {
+                    info1 = iter1.next();
+                } else {
+                    info1 = null;
+                }
             } else {
-                info2 = iter2.hasNext() ? iter2.next() : null;
+                // Avanza solo iter2 (versión con if-else)
+                if (iter2.hasNext()) {
+                    info2 = iter2.next();
+                } else {
+                    info2 = null;
+                }
             }
         }
 

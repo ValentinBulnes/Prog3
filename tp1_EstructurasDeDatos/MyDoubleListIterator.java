@@ -1,4 +1,4 @@
-package ProgramacionIII.tp1;
+package ProgramacionIII.tp1_EstructurasDeDatos;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

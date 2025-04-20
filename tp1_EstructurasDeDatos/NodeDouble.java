@@ -1,4 +1,4 @@
-package ProgramacionIII.tp1;
+package ProgramacionIII.tp1_EstructurasDeDatos;
 
 public class NodeDouble<T> {
     private T info;

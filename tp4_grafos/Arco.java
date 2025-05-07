@@ -6,7 +6,7 @@ package ProgramacionIII.tp4_grafos;
  * (Inmutable: una vez creado el arco no es posible cambiarle los valores).
  */
 
-public class Arco {
+public class Arco<T> {
 
     private int verticeOrigen;
     private int verticeDestino;

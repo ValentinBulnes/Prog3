@@ -1,7 +1,7 @@
 package ProgramacionIII.tp4_grafos;
 import java.util.Iterator;
 
-public class Grafo<T> {
+public interface Grafo<T> {
 
     // Agrega un vertice
     public void agregarVertice(int verticeId);

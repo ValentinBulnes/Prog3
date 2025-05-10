@@ -20,7 +20,6 @@ public class Vertice<T> {
             if (adyacente.getVerticeDestino() == verticeId){
                 return true;
             }
-
         }
         return false;
     }

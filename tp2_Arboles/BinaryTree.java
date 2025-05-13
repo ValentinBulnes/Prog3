@@ -1,10 +1,14 @@
 package ProgramacionIII.tp2_Arboles;
 
-public class Tree {
+public class BinaryTree {
 
 	private TreeNode root;
+
+	public BinaryTree(TreeNode rootNode) {
+		this.root = rootNode;
+	}
 	
-	public Tree() {
+	public BinaryTree() {
 		this.root = null;
 	}
 	

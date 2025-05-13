@@ -28,9 +28,11 @@ public class TreeNode {
 		this.right = right;
 	}
 
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+
 	public Integer getValue() {
 		return value;
 	}
-
-
 }

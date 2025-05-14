@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BinarySearchTree {
+
     private TreeNode root;
 
     public BinarySearchTree() {
@@ -12,9 +13,9 @@ public class BinarySearchTree {
 
     // Complejidad O(1), simplemente devuelve el valor de la raíz del árbol.
     public Integer getRoot() {
-        if (this.root == null)
+        if (this.root == null) {
             return null;
-
+        }
         return this.root.getValue();
     }
 
@@ -23,14 +24,15 @@ public class BinarySearchTree {
     }
 
     public boolean hasElem(TreeNode node, Integer value) {
-        if (node == null)
+        if (node == null) {
             return false;
+        }
 
-        if (node.getValue().equals(value)){
+        if (node.getValue().equals(value)) {
             return true;
         }
 
-        if(value < node.getValue()) {
+        if (value < node.getValue()) {
             // Si el valor buscado es menor al valor del nodo actual, llamo recursivo al nodo izquierdo
             return hasElem(node.getLeft(), value);
         } else {

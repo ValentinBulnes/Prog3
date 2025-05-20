@@ -10,66 +10,63 @@ import java.util.List;
 //grafo de entrada es acíclico
 
 public class Ejercicio4 {       //resuelvo utilizando DFS
-        private static final String BLANCO = "Blanco";
-        private static final String AMARILLO = "Amarillo";
-        private static final String NEGRO = "Negro";
 
-        private HashMap<Integer, String> estados;
+        private Grafo<Integer> grafo;
+        private HashMap<Integer, String> colores;
         private List<Integer> mejorCamino;
         private int maxLongitud;
-        private Grafo<Integer> grafo;
-        private int verticeFin;
 
-        public List<Integer> encontrarCaminoMasLargo(Grafo<Integer> grafo, int inicio, int fin) {
+        public Ejercicio4(Grafo<Integer> grafo ) {
             this.grafo = grafo;
-            this.verticeFin = fin;
+            this.colores = new HashMap<>();
             this.mejorCamino = new ArrayList<>();
             this.maxLongitud = -1;
-            this.estados = new HashMap<>();
+        }
 
+        public List<Integer> encontrarCaminoMasLargo(Integer inicio, Integer fin) {
             // Inicializar todos los vértices como BLANCO (no visitados)
-            Iterator<Integer> vertices = grafo.obtenerVertices();
-            while (vertices.hasNext()) {
-                estados.put(vertices.next(), BLANCO);
+            Iterator<Integer> itVertices = grafo.obtenerVertices();
+            while (itVertices.hasNext()) {
+                Integer vertice = itVertices.next();
+                colores.put(vertice, "blanco");
             }
 
             List<Integer> caminoActual = new ArrayList<>();
             caminoActual.add(inicio);
-            estados.put(inicio, AMARILLO); // Marcamos como en proceso
+            colores.put(inicio, "amarillo"); // Genero mi estado inicial, marco como en proceso
 
-            dfsVisit(inicio, caminoActual);
+            dfsVisit(inicio, fin, caminoActual);
 
             return new ArrayList<>(mejorCamino);
         }
 
-        private void dfsVisit(int actual, List<Integer> caminoActual) {
+        private void dfsVisit(Integer actual,Integer fin, List<Integer> caminoActual) {
             // Si llegamos al vértice final, verificamos si es el camino más largo
-            if (actual == verticeFin) {
-                if (caminoActual.size() > maxLongitud) {
-                    maxLongitud = caminoActual.size();
-                    mejorCamino = new ArrayList<>(caminoActual);
+            if (actual == fin) {
+                if (caminoActual.size() > mejorCamino.size()) {
+                    this.mejorCamino.clear();
+                    this.mejorCamino.addAll(caminoActual);
+                }
+            } else {
+                // Explorar vértices adyacentes
+                Iterator<Integer> itAdyacentes = grafo.obtenerAdyacentes(actual);
+                while (itAdyacentes.hasNext()) { //por cada posible decision
+                    Integer adyacente = itAdyacentes.next();
+
+                    if (colores.get(adyacente).equals("blanco")) {
+                        colores.put(adyacente, "amarillo"); // aplicaba los cambios
+                        caminoActual.add(adyacente);
+
+                        dfsVisit(adyacente, fin, caminoActual); // llamaba recursivamente
+
+                        // Backtracking
+                        colores.put(adyacente, "blanco");
+                        caminoActual.removeLast();
+                    }
                 }
             }
 
-            // Explorar vértices adyacentes
-            Iterator<Integer> adyacentes = grafo.obtenerAdyacentes(actual);
-            while (adyacentes.hasNext()) {
-                int vecino = adyacentes.next();
-                String estado = estados.get(vecino);
-
-                if (BLANCO.equals(estado)) {
-                    estados.put(vecino, AMARILLO);
-                    caminoActual.add(vecino);
-
-                    dfsVisit(vecino, caminoActual);
-
-                    // Backtracking
-                    caminoActual.remove(caminoActual.size() - 1);
-                    estados.put(vecino, BLANCO);
-                }
-            }
-
-            estados.put(actual, NEGRO); // Marcamos como completamente procesado
+            colores.put(actual, "negro"); // Marcamos como completamente procesado
         }
 
     public static void main(String[] args) {
@@ -89,8 +86,8 @@ public class Ejercicio4 {       //resuelvo utilizando DFS
         grafo.agregarArco(3, 2, null);
 
         // Instanciar el resolver
-        Ejercicio4 ej4 = new Ejercicio4();
-        List<Integer> camino = ej4.encontrarCaminoMasLargo(grafo, 1, 2);
+        Ejercicio4 ej4 = new Ejercicio4(grafo);
+        List<Integer> camino = ej4.encontrarCaminoMasLargo( 1, 2);
 
         System.out.println("Camino más largo encontrado: " + camino);
         System.out.println("Longitud del camino: " + camino.size());

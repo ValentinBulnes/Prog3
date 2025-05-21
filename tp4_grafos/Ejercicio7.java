@@ -35,33 +35,33 @@ public class Ejercicio7 {
     }
 
     private void encontrarTodosLosCaminosRec(Integer actual, Integer destino, LinkedList<Integer> caminoActual) {
-        if (actual.equals(destino)) {
-            soluciones.add(new LinkedList<>(caminoActual));
-            return;
-        }
+        // Condicion de corte
+        if (actual == destino) { // si se cumple corta la recursividad
+            List<Integer> solucion = new LinkedList<>(caminoActual);
+            soluciones.add(solucion);
+        } else {
+            Iterator<Integer> itAdy = grafo.obtenerAdyacentes(actual);
+            while (itAdy.hasNext()) {  // por cada posible decision
+                Integer adyacente = itAdy.next();
 
-        Iterator<Integer> itAdy = grafo.obtenerAdyacentes(actual);
-        while (itAdy.hasNext()) {
-            Integer adyacente = itAdy.next();
+                // Determinar si el tramo actual -> adyacente ES el tramo cortado
+                boolean esTramoCortado = (actual == VERTICE_LAS_FLORES && adyacente == VERTICE_RAUCH) ||
+                        (actual == VERTICE_RAUCH && adyacente == VERTICE_LAS_FLORES);
 
-            // Determinar si el tramo actual -> adyacente ES el tramo cortado
-            boolean esTramoCortado = (actual == VERTICE_LAS_FLORES && adyacente == VERTICE_RAUCH) ||
-                    (actual == VERTICE_RAUCH && adyacente == VERTICE_LAS_FLORES);
-
-            // Solo procesar si el tramo NO está cortado
-            if (!esTramoCortado) {
-                // Y si el vértice adyacente no ha sido visitado en el camino actual (es "blanco")
-                if (colores.get(adyacente).equals("blanco")) {
-                    colores.put(adyacente, "amarillo"); // Marcar como visitado en este camino
-                    caminoActual.add(adyacente);       // Agregar al camino actual
-
-                    encontrarTodosLosCaminosRec(adyacente, destino, caminoActual); // Explorar recursivamente
-
-                    // Backtracking: revertir los cambios para explorar otras ramas
-                    colores.put(adyacente, "blanco");   // Desmarcar
-                    caminoActual.removeLast();          // Quitar del camino actual
+                // Solo procesar si el tramo NO está cortado
+                if (!esTramoCortado) {
+                    // Y si el vértice adyacente no ha sido visitado en el camino actual (es "blanco")
+                    if (colores.get(adyacente).equals("blanco")) {
+                        colores.put(adyacente, "amarillo"); // Marcar como visitado en este camino
+                        caminoActual.add(adyacente);       // Agregar al camino actual
+                        encontrarTodosLosCaminosRec(adyacente, destino, caminoActual); // Explorar recursivamente
+                        //Backtracking: revertir los cambios para explorar otras ramas. Cuando se llega a destino o cuando no quedan adyacentes por visitar
+                        colores.put(adyacente, "blanco");   // deshacer los cambios
+                        caminoActual.removeLast();          // Quitar del camino actual
+                    }
                 }
             }
+
         }
     }
 

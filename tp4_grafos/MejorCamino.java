@@ -33,7 +33,6 @@ public class MejorCamino {
     }
 
     private void encontrarMejorCaminoRec(Integer actual, Integer destino, List<Integer> caminoActual) {
-
         // Condicion de corte
         if (actual == destino) {
             if (esMejor(caminoActual, this.mejorSolucion)) {

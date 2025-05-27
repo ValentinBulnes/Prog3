@@ -34,13 +34,7 @@ public class MejorCaminoConPeso {
         return mejorSolucion;
     }
 
-    private void encontrarMejorCaminoRec(
-            Integer actual,
-            Integer destino,
-            List<Integer> caminoActual,
-            int pesoActual
-    ) {
-
+    private void encontrarMejorCaminoRec(Integer actual, Integer destino, List<Integer> caminoActual, int pesoActual) {
         // Condicion de corte
         if (actual == destino) {
             if (esMejor(pesoActual, mejorPeso)) {

@@ -22,8 +22,8 @@ public class Ejercicio1 {
 
     private void buscarCamino(Integer actual, Integer destino, List<Integer> caminoActual, Set<Integer> visitados) {
         // Agregar la sala actual al camino y marcarla como visitada
-        caminoActual.add(actual);
-        visitados.add(actual);
+        caminoActual.add(actual);  //AGREGO
+        visitados.add(actual);     //AGREGO
         // Si llegamos a la sala de salida, verificamos si es el camino más largo
         if (actual == destino) { //condicion de corte
             if (caminoActual.size() > mejorSolucion.size()) {
@@ -41,8 +41,8 @@ public class Ejercicio1 {
                 }
             }
         }
-        visitados.remove(actual);
-        caminoActual.remove(caminoActual.size() - 1);
+        visitados.remove(actual);                                 //DESHAGO (misma altura que agrego)
+        caminoActual.remove(caminoActual.size() - 1);       //DESHAGO (misma altura que agrego)
     }
 
     public static void main(String[] args) {
@@ -54,8 +54,6 @@ public class Ejercicio1 {
         grafo.agregarVertice(3);
         grafo.agregarVertice(4);
         grafo.agregarVertice(5);
-        grafo.agregarVertice(6);
-        grafo.agregarVertice(7);
         grafo.agregarVertice(8);
 
         grafo.agregarArco(1, 2, null);

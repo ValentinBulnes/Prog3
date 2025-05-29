@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Ejercicio3 {
-    private int M = 9; //Objetivo
-    List<List<Integer>> soluciones;
+    private int M = 10; //Objetivo
+    private List<List<Integer>> soluciones;
 
     public List<List<Integer>> backSubconjuntos(List<Integer> conjunto) {
         soluciones = new ArrayList<>();
@@ -31,10 +31,10 @@ public class Ejercicio3 {
     }
 
     public static void main(String[] args) {
-        List<Integer> conjunto = Arrays.asList(4, 6, 2, 1);
+        List<Integer> conjunto = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         Ejercicio3 ej3 = new Ejercicio3();
         List<List<Integer>> resultado = ej3.backSubconjuntos(conjunto);
 
-        System.out.println("Subconjuntos que suman 9: " + resultado);
+        System.out.println("Subconjuntos que suman 10: " + resultado);
     }
 }
